@@ -1,12 +1,11 @@
 {
+  "extends": "./tsconfig.json",
   "compilerOptions": {
-    // ...
-    "baseUrl": ".",
-    "paths": {
-      "@/*": [
-        "./src/*"
-      ]
-    }
-    // ...
-  }
+    "jsx": "react-jsx",
+    "target": "es6",
+    "module": "esnext",
+    "strict": true
+  },
+  "include": ["src/**/*"],
+  "exclude": ["node_modules"]
 }

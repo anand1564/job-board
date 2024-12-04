@@ -9,6 +9,10 @@
     }
   ],
   "compilerOptions": {
+    "jsx": "react-jsx", // For React 17+ with automatic JSX runtime
+    "allowSyntheticDefaultImports": true, // Enables importing JSX/React components correctly
+    "esModuleInterop": true, // Ensures proper module imports
+    "moduleResolution": "node", // Ensures node_modules resolution
     "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
