@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 const companySchema = new Schema({
      name: { type: String, required: true },
      description: { type: String },
@@ -10,3 +13,4 @@ const companySchema = new Schema({
    
    const Company = mongoose.model('Company', companySchema);
    
+export default Company

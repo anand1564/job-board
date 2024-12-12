@@ -1,3 +1,6 @@
+const mongoose = require('mongoose');
+const { Schema } = mongoose;
+
 const jobPostSchema = new Schema({
      title: { type: String, required: true },
      description: { type: String },
@@ -16,3 +19,4 @@ const jobPostSchema = new Schema({
    
    const JobPost = mongoose.model('JobPost', jobPostSchema);
    
+export default JobPost
