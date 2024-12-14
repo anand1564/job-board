@@ -30,4 +30,38 @@ router.post("/:userId/:companyId/create",async(req,res)=>{
           res.send('You are not authorized to create a job post');
      }
 })
+router.get('/all',async(req,res)=>{
+     try {
+          const jobPosts=await JobPost.find();
+          res.send(jobPosts);
+     } catch (error) {
+          res.status(400).send
+     }
+});
+router.get('/:jobId',async(req,res)=>{
+     try {
+          const {jobId}=req.params;
+          const jobPost=await JobPost.findById(jobId);
+          if(jobPost){
+               res.send(jobPost);
+          }else{
+               res.send('Job post not found');
+          }
+     } catch (error) {
+          res.status(400).send(error);
+     }
+})
+router.get('/company/:companyId',async(req,res)=>{
+     try {
+          const {companyId}=req.params;
+          const company=await Company.findById(companyId);
+          if(!company){
+               res.send('Company not found');
+          }
+          const jobPosts=await JobPost.find({company:companyId});
+          res.send(jobPosts);
+     }catch(error){
+          res.status(400).send(error);
+     }
+});
 export default router;

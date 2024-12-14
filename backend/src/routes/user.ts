@@ -26,5 +26,18 @@ router.get('/all',async(req,res)=>{
           res.status(400).send(err);
      }
 })
+router.post('/login',async(req,res)=>{
+     const {email,password} = req.body;
+     try{
+          const user=await User.findOne({email:email,password:password});
+          if(user){
+               res.send(user);
+          }else{
+               res.send('User not found');
+          }
+     }catch(err){
+          res.status(400).send(err);
+     }
+})
 
 export default router;
