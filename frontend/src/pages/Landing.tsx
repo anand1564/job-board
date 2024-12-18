@@ -1,5 +1,8 @@
+import Footer from "@/components/footer";
 import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
+import { Features } from "@/components/features";
+import { Reviews } from "@/components/reviews";
 
 export default function Landing() {
   return (
@@ -33,6 +36,9 @@ export default function Landing() {
           />
         </div>
       </div>
+      <Features/>
+      <Reviews />
+      <Footer/>
     </div>
   );
 }
