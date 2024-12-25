@@ -4,6 +4,7 @@ import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import JobPortal from './pages/JobPortal'
 import JobApplicationForm from './pages/Application'
 import Landing from './pages/Landing'
+import { JobPost } from './pages/JobPost'
 function App() {
   const [count, setCount] = useState(0)
 
@@ -13,6 +14,7 @@ function App() {
       <Route path='/' element={<Landing/>}/>
       <Route path="/jobPortal" element={<JobPortal/>} />
       <Route path='/apply' element={<JobApplicationForm jobId={1} jobTitle='Senior React Developer' />}/>
+      <Route path="/addJob" element={<JobPost />} />
     </Routes>
     </BrowserRouter>
   )
