@@ -12,7 +12,7 @@ function App() {
     <BrowserRouter>
     <Routes>
       <Route path='/' element={<Landing/>}/>
-      <Route path="/jobPortal" element={<JobPortal/>} />
+      <Route path="/:userId/jobPortal" element={<JobPortal/>} />
       <Route path='/apply' element={<JobApplicationForm jobId={1} jobTitle='Senior React Developer' />}/>
       <Route path="/addJob" element={<JobPost />} />
     </Routes>

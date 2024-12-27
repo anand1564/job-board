@@ -26,6 +26,19 @@ router.get('/all',async(req,res)=>{
           res.status(400).send(err);
      }
 })
+router.get('/:userId/role',async(req,res)=>{
+     const {userId} = req.params;
+     try{
+          const user=await User.findById(userId);
+          if(user){
+               res.send(user.role);
+          }else{
+               res.send('User not found');
+          }
+     }catch(err){
+          res.status(400).send(err);
+     }
+})
 router.post('/login',async(req,res)=>{
      const {email,password} = req.body;
      try{

@@ -4,6 +4,8 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Search, Filter, MapPin, Briefcase, DollarSign } from 'lucide-react';
+import { AddJob } from '@/components/addJob';
+import { useNavigate, useParams } from 'react-router-dom';
 
 // Job Interface
 interface Job {
@@ -144,19 +146,50 @@ const JobPortal: React.FC = () => {
   const [selectedJob, setSelectedJob] = useState<Job | null>(null);
   const [searchTerm, setSearchTerm] = useState('');
   const [jobType, setJobType] = useState<string>('');
+  const [userRole, setUserRole] = useState<string>('JOB_SEEKER');
+  const { userId } = useParams<{ userId: string }>();
+  const [loading,setLoading]=useState(true);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    const filtered = jobs.filter(job => 
-      job.title.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      (jobType ? job.type === jobType : true)
+    const fetchUser=async()=>{
+      try{
+    const response = await fetch(`http://localhost:3000/user/${userId}/role`)
+    if(!response){
+      throw new Error('Failed to fetch user role')
+    }
+    const role = await response.json();
+    setUserRole(role);
+  }catch(err){
+    console.error(err);
+  }finally{
+    setLoading(false);
+  }
+  }
+  fetchUser();
+  }, [userId]);
+
+  if(loading){
+    return <div>Loading...</div>
+  }
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value);
+    const filtered = jobs.filter((job) =>
+      job.title.toLowerCase().includes(e.target.value.toLowerCase())
     );
     setFilteredJobs(filtered);
-  }, [searchTerm, jobType, jobs]);
-
+  };
+  const handleAddJob=()=>{
+    navigate(`${userId}/addJob`);
+  }
   return (
     <div className="container mx-auto p-4">
+      <div className='flex justify-between items-center space-between'>
       <h1 className="text-3xl font-bold mb-6">Job Portal</h1>
-      
+      {userRole === 'RECRUITER' && (
+        <button type="button" className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800" onClick={handleAddJob}>Add Job</button>
+      )}
+      </div>
       <div className="flex gap-4 mb-6">
         <div className="relative flex-grow">
           <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground" />
