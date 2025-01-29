@@ -5,7 +5,7 @@ import jobRouter from './routes/job';
 import companyRouter from './routes/addCompany'
 
 const mongoose = require('mongoose');
-const database_url=process.env.DATABASE_URL || "";
+const database_url="";
 mongoose.connect(database_url, {
 })
 .then(() => console.log('Connected to MongoDB'))

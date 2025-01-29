@@ -3,8 +3,10 @@ import Header from "@/components/header";
 import { Button } from "@/components/ui/button";
 import { Features } from "@/components/features";
 import { Reviews } from "@/components/reviews";
+import { useNavigate } from "react-router-dom";
 
 export default function Landing() {
+  const navigate = useNavigate();
   return (
     <div className="flex flex-col min-h-screen">
       <Header />
@@ -18,10 +20,10 @@ export default function Landing() {
             Find your dream job with us
           </p>
           <div className="flex flex-row gap-4">
-            <Button className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700">
+            <Button className="px-6 py-2 text-white bg-blue-600 hover:bg-blue-700" onClick={()=>{navigate('/addJob')}}>
               For Recruiters
             </Button>
-            <Button className="px-6 py-2 text-white bg-green-600 hover:bg-green-700">
+            <Button className="px-6 py-2 text-white bg-green-600 hover:bg-green-700" onClick={()=>{navigate('/jobPortal')}}>
               For Job Seekers
             </Button>
           </div>
